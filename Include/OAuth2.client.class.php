@@ -40,7 +40,7 @@ class HmtTOAuthV2 {
 	 *
 	 * @ignore
 	 */
-	public $host = "http://localhost/open/OAuth/";
+	public $host = "http://hometown.scau.edu.cn/open/OAuth/";
 	/**
 	 * Set timeout default.
 	 *
