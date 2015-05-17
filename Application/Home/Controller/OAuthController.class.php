@@ -11,8 +11,7 @@ class OAuthController extends Controller {
         $this->OAuth = new \ThinkOAuth2();
         $this->tokenDb = D('oauth_token');
 
-
-        if(ACTION_NAME != 'access_token' || ACTION_NAME != 'get_token_info'){
+        if(ACTION_NAME != 'access_token' && ACTION_NAME != 'get_token_info'){
             //检查应用信息
             $this->params = $this->OAuth->getAuthorizeParams();
             $this->client = D('oauth_clients')->where(array('client_id' => $this->params['client_id']))->find();
