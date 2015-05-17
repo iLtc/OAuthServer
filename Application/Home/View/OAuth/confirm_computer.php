@@ -59,7 +59,7 @@
                 <label id="scope-title">该应用将同时拥有以下权限</label>
                 <div class="checkbox disabled">
                     <label>
-                        <input type="checkbox" disabled>
+                        <input type="checkbox" checked disabled>
                         获取您的基本信息
                     </label>
                 </div>
