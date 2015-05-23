@@ -125,3 +125,16 @@ function buildUri($uri, $params) {
         . ((isset($parse_url["query"])) ? "?" . $parse_url["query"] : "")
         . ((isset($parse_url["fragment"])) ? "#" . $parse_url["fragment"] : "");
 }
+
+function getTitle($code){
+    $name = explode('~', $code);
+    $where = array(
+        'type' => $name[0],
+        'value' => $name[1]
+    );
+
+    $title = M('name_title')->where($where)->cache('title_'.$code)->getField('title');
+
+    if($title) return $title;
+    else return '未知操作';
+}
