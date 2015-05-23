@@ -37,17 +37,21 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="control-label col-sm-2">应用类型</label>
+                <div class="col-sm-4">
+                    <p class="form-control-static"><a href="__APP__/Admin/Client/<?=$client['client_id']?>/type.html" class="confirm" data-confirm="确定要修改应用“<?=$client['client_title']?>”的类型吗？">
+                            <?php $span_class = $client['client_type'] ? 'label-success' : 'label-warning';?>
+                            <span class="label <?=$span_class?>"><?=getTitle('client_type~'.$client['client_type']);?></span>
+                        </a></p>
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="control-label col-sm-2">应用状态</label>
                 <div class="col-sm-4">
-                    <p class="form-control-static">
-                        <a href="__APP__/Admin/Client/<?=$client['client_id']?>/change.html" class="confirm" data-confirm="确定要修改应用“<?=$client['client_title']?>”的状态吗？">
-                            <?php if($client['status']){?>
-                                <span class="label label-success">生产</span>
-                            <?php }else{?>
-                                <span class="label label-warning">开发</span>
-                            <?php }?>
-                        </a>
-                    </p>
+                    <p class="form-control-static"><a href="__APP__/Admin/Client/<?=$client['client_id']?>/status.html" class="confirm" data-confirm="确定要修改应用“<?=$client['client_title']?>”的状态吗？">
+                            <?php $span_class = $client['client_status'] ? 'label-success' : 'label-danger';?>
+                            <span class="label <?=$span_class?>"><?=getTitle('status~'.$client['client_status']);?></span>
+                        </a></p>
                 </div>
             </div>
             <div class="form-group">
@@ -58,12 +62,4 @@
             </div>
         </fieldset>
     </form>
-</block>
-<block name="script">
-    <script>
-        $(".panel-body").css('display', 'none');
-        $(".panel-heading").click(function(){
-            $(".panel-body").slideToggle();
-        });
-    </script>
 </block>

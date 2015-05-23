@@ -30,7 +30,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav" id="navs">
-                <li id="nav-Client"><a href="__APP__/Admin/Client/index.html">申请模块</a></li>
+                <li id="nav-Client"><a href="__APP__/Admin/Client/index.html">应用管理</a></li>
+                <li id="nav-Api"><a href="__APP__/Admin/Api/index.html">接口管理</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?=getConfig('bbs_uri')?>?<?=$worker['uid']?>" target="_blank">

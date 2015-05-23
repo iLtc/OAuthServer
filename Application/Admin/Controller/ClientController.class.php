@@ -23,13 +23,14 @@ class ClientController extends AdminController {
             'create_time' => time(),
             'client_secret' => randString()
         );
-        $client_id = $this->clientDb->add($data);
-
-        $this->success('添加成功', __APP__."/Admin/Client/{$client_id}.html");
+        if($client_id = $this->clientDb->add($data)){
+            $this->success('添加成功', __APP__."/Admin/Client/{$client_id}.html");
+        }else $this->error('添加失败，请重试');
     }
 
     public function edit(){
         $client = $this->clientDb->where(array('client_id' => I('get.client_id')))->find();
+        if(!$client) $this->error('应用不存在');
 
         if(IS_GET){
             $this->assign('client', $client);
@@ -44,25 +45,35 @@ class ClientController extends AdminController {
         }
     }
 
-    public function change(){
+    public function type(){
         $client = $this->clientDb->where(array('client_id' => I('get.client_id')))->find();
-        $client['status'] = ($client['status'] + 1) % 2;
-        $this->clientDb->save($client);
+        if(!$client) $this->error('应用不存在');
 
-        $this->success('修改成功');
+        $client['client_type'] = ($client['client_type'] + 1) % 2;
+        if($this->clientDb->save($client)) $this->success('修改成功');
+        else $this->error('修改失败');
+    }
+
+    public function status(){
+        $client = $this->clientDb->where(array('client_id' => I('get.client_id')))->find();
+        if(!$client) $this->error('应用不存在');
+
+        $client['client_status'] = ($client['client_status'] + 1) % 2;
+        if($this->clientDb->save($client)) $this->success('修改成功');
+        else $this->error('修改失败');
     }
 
     public function secret(){
         $client = $this->clientDb->where(array('client_id' => I('get.client_id')))->find();
-        $client['client_secret'] = randString();
-        $this->clientDb->save($client);
+        if(!$client) $this->error('应用不存在');
 
-        $this->success('修改成功');
+        $client['client_secret'] = randString();
+        if($this->clientDb->save($client)) $this->success('修改成功');
+        else $this->error('修改失败');
     }
 
     public function delete(){
-        $this->clientDb->where(array('client_id' => I('get.client_id')))->delete();
-
-        $this->success('删除成功');
+        if($this->clientDb->where(array('client_id' => I('get.client_id')))->delete()) $this->success('删除成功');
+        else $this->error('删除失败');
     }
 }

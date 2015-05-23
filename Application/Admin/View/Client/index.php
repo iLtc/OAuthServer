@@ -9,9 +9,9 @@
 </block>
 <block name="main">
     <div class="panel panel-default">
-        <div class="panel-heading">添加应用</div>
+        <div class="panel-heading" id="add_app">添加应用</div>
         <div class="panel-body">
-            <form method="post" action="add.html" class="form-horizontal">
+            <form method="post" action="__APP__/Admin/Client/add.html" class="form-horizontal">
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="client_title">应用名称</label>
                     <div class="col-sm-3">
@@ -45,6 +45,7 @@
         <tr>
             <th>client_id</th>
             <th>应用名称</th>
+            <th>应用类型</th>
             <th>应用状态</th>
             <th>&nbsp;</th>
         </tr>
@@ -54,27 +55,18 @@
             <tr>
                 <td><?=$client['client_id']?></td>
                 <td><a href="<?=$client['client_uri']?>" target="_blank"><?=$client['client_title']?></a></td>
-                <td>
-                    <a href="__APP__/Admin/Client/<?=$client['client_id']?>/change.html" class="confirm" data-confirm="确定要修改应用“<?=$client['client_title']?>”的状态吗？">
-                        <?php if($client['status']){?>
-                            <span class="label label-success">生产</span>
-                        <?php }else{?>
-                            <span class="label label-warning">开发</span>
-                        <?php }?>
-                    </a>
-                </td>
+                <td><a href="__APP__/Admin/Client/<?=$client['client_id']?>/type.html" class="confirm" data-confirm="确定要修改应用“<?=$client['client_title']?>”的类型吗？">
+                        <?php $span_class = $client['client_type'] ? 'label-success' : 'label-warning';?>
+                        <span class="label <?=$span_class?>"><?=getTitle('client_type~'.$client['client_type']);?></span>
+                    </a></td>
+                <td><a href="__APP__/Admin/Client/<?=$client['client_id']?>/status.html" class="confirm" data-confirm="确定要修改应用“<?=$client['client_title']?>”的状态吗？">
+                        <?php $span_class = $client['client_status'] ? 'label-success' : 'label-danger';?>
+                        <span class="label <?=$span_class?>"><?=getTitle('status~'.$client['client_status']);?></span>
+                    </a></td>
                 <td><a class="btn btn-info btn-xs" href="__APP__/Admin/Client/<?=$client['client_id']?>.html">编辑</a>
                     <a class="btn btn-danger btn-xs confirm" data-confirm="确定要删除应用“<?=$client['client_title']?>”吗？" href="__APP__/Admin/Client/<?=$client['client_id']?>/delete.html">删除</a></td>
             </tr>
         <?php }?>
         </tbody>
     </table>
-</block>
-<block name="script">
-    <script>
-        $(".panel-body").css('display', 'none');
-        $(".panel-heading").click(function(){
-            $(".panel-body").slideToggle();
-        });
-    </script>
 </block>

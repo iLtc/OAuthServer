@@ -2,7 +2,9 @@
 namespace Admin\Controller;
 use Think\Controller;
 
-require_once './Include/OAuth2.client.class.php';
+if(APP_DEV) require_once './Include/OAuth2.client.dev.class.php';
+else require_once './Include/OAuth2.client.class.php';
+
 
 class AccountController extends AdminController {
     public function __construct() {
