@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -63,12 +63,14 @@
                         获取您的基本信息
                     </label>
                 </div>
-                <!--<div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="" checked>
-                        其他……
-                    </label>
-                </div>-->
+                <?php foreach($scopes as $id => $scope){?>
+                    <div class="checkbox" <?=($scope['api_type'] == 1) ? 'disabled' : ''?>>
+                        <label>
+                            <input type="checkbox" name="scope[]" value="<?=$id?>" checked <?=($scope['api_type'] == 1) ? 'disabled' : ''?>>
+                            <?=$scope['api_title']?>
+                        </label>
+                    </div>
+                <?php }?>
             </div>
             <div class="form-group col-md-14">
                 <input class="btn btn-danger" type="submit" name="action" value="授权">

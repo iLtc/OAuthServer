@@ -21,7 +21,8 @@ class ClientController extends AdminController {
             'client_uri' => I('client_uri'),
             'redirect_uri' => I('redirect_uri'),
             'create_time' => time(),
-            'client_secret' => randString()
+            'client_secret' => randString(),
+            'client_status' => 1
         );
         if($client_id = $this->clientDb->add($data)){
             $this->success('添加成功', __APP__."/Admin/Client/{$client_id}.html");
@@ -31,14 +32,18 @@ class ClientController extends AdminController {
     public function edit(){
         $client = $this->clientDb->where(array('client_id' => I('get.client_id')))->find();
         if(!$client) $this->error('应用不存在');
+        
+        $apis = D('api')->where(array('api_status' => 1))->getField('api_id, api_title', true);
 
         if(IS_GET){
             $this->assign('client', $client);
+            $this->assign('apis', $apis);
             $this->display();
         }else{
             $client['client_title'] = I('client_title');
             $client['client_uri'] = I('client_uri');
             $client['redirect_uri'] = I('redirect_uri');
+            $client['client_aids'] = implode(',', I('allows'));
             $this->clientDb->save($client);
 
             $this->success('修改成功');

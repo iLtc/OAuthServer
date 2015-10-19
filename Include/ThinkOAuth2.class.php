@@ -202,4 +202,12 @@ class ThinkOAuth2 extends OAuth2 {
         }
         return $token;
     }
+	
+	protected function getSupportedScopes() {
+		$scopes = D('api')->where(array('api_status' => 1))->getField('api_id', true);
+		$allow_scopes = D('oauth_clients')->where(array('client_id' => I('client_id')))->getField('client_aids');
+		$allow_scopes = explode(',', $allow_scopes);
+		
+		return array_intersect($scopes, $allow_scopes);
+	}
 }

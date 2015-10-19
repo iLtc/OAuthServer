@@ -915,10 +915,10 @@ abstract class OAuth2 {
   private function checkScope($required_scope, $available_scope) {
     // The required scope should match or be a subset of the available scope
     if (!is_array($required_scope))
-      $required_scope = explode(" ", $required_scope);
+      $required_scope = explode(",", $required_scope);
 
     if (!is_array($available_scope))
-      $available_scope = explode(" ", $available_scope);
+      $available_scope = explode(",", $available_scope);
 
     return (count(array_diff($required_scope, $available_scope)) == 0);
   }
@@ -1079,7 +1079,7 @@ abstract class OAuth2 {
       $this->errorJsonResponse(OAUTH2_HTTP_BAD_REQUEST, OAUTH2_ERROR_INVALID_SCOPE);
 
     if (!$input["scope"])
-      $input["scope"] = NULL;
+      $input["scope"] = empty($stored["scope"]) ? NULL : $stored["scope"];
 
     $token = $this->createAccessToken($client[0], $input["scope"], $stored['user_id']);
 

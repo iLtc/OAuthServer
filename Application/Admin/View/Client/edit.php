@@ -55,6 +55,21 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="control-label col-sm-2">接口许可</label>
+                <div class="col-sm-4">
+                    <?php
+                    $allows = explode(',', $client['client_aids']);
+                    foreach($apis as $id => $api){?>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="allows[]" value="<?=$id?>" <?=(in_array($id, $allows)) ? 'checked' : ''?>>
+                                <?=$api?>
+                          </label>
+                        </div>
+                    <?php }?>
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-primary">修改</button>
                     <button type="reset" class="btn btn-default">重填</button>
