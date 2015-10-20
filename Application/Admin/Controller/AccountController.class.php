@@ -2,7 +2,7 @@
 namespace Admin\Controller;
 use Think\Controller;
 
-if(APP_DEV) require_once './Include/OAuth2.client.dev.class.php';
+if($_SERVER['SERVER_NAME'] == 'hmt.iltcapp.net') require_once './Include/OAuth2.client.dev.class.php';
 else require_once './Include/OAuth2.client.class.php';
 
 
